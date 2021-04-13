@@ -28,7 +28,6 @@ RUN curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
   rm install.sh
 
 # disable git ssl verification 
-RUN git init && \
-  git config --global http.sslVerify false
+RUN git config --global http.sslVerify false
 
 CMD ["zsh"]
