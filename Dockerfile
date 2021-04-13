@@ -27,7 +27,8 @@ RUN curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
   sh install.sh && \
   rm install.sh
 
-# disable git ssl verification 
-RUN git config --global http.sslVerify false
+# Add SAP root CA to container
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAPNetCA_G2.crt' -o '/usr/local/share/ca-certificates/SAPNetCA_G2.crt'
+RUN /usr/sbin/update-ca-certificates
 
 CMD ["zsh"]
