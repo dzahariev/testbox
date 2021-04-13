@@ -1,22 +1,23 @@
-FROM alpine:3 AS package_step
+FROM maven:3-jdk-8 AS package_step
 
-RUN apk update && \
-  apk add zsh && \
-  apk add curl && \
-  apk add git && \
-  apk add vim && \
-  apk add postgresql-client && \
-  apk add jq && \
-  apk add build-base  && \
-  apk add ruby-dev 
+RUN apt-get update && \
+  apt-get install -y zsh && \
+  apt-get install -y curl && \
+  apt-get install -y git && \
+  apt-get install -y vim && \
+  apt-get install -y jq && \
+  apt-get install -y ruby-full && \
+  apt-get install -y build-essential && \
+  chsh -s $(which zsh) 
 
 # install uaac
 RUN gem install cf-uaac
 
 # install CF cli
-RUN curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v7&source=github" | tar -zx && \
-  mv ./cf7 /usr/bin/ && \
-  mv ./cf /usr/bin/
+RUN curl -s https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add - && \
+  echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list && \
+  apt-get update && \
+  apt-get install -y cf7-cli
 
 # install Oh My Zsh
 RUN curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh && \
