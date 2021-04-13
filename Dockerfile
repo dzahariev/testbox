@@ -3,6 +3,7 @@ FROM maven:3-jdk-8 AS package_step
 RUN apt-get update && \
   apt-get install -y zsh && \
   apt-get install -y curl && \
+  apt-get install -y git && \
   apt-get install -y vim && \
   apt-get install -y jq && \
   apt-get install -y ruby-full && \
