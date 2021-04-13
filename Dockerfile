@@ -8,7 +8,6 @@ RUN apt-get update && \
   apt-get install -y jq && \
   apt-get install -y ruby-full && \
   apt-get install -y ca-certificates && \
-  update-ca-certificates && \
   apt-get install -y apt-transport-https && \
   apt-get install -y build-essential && \
   chsh -s $(which zsh) 
@@ -28,14 +27,13 @@ RUN curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
   rm install.sh
 
 # Add SAP root CA to container
-RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Root%20CA.crt' -o '/usr/local/share/ca-certificates/SAP%20Global%20Root%20CA.crt'
-RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAPNetCA_G2.crt' -o '/usr/local/share/ca-certificates/SAPNetCA_G2.crt'
-RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Sub%20CA%2002.crt' -o '/usr/local/share/ca-certificates/SAP%20Global%20Sub%20CA%2002.crt'
-RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Sub%20CA%2004.crt' -o '/usr/local/share/ca-certificates/SAP%20Global%20Sub%20CA%2004.crt'
-RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Sub%20CA%2005.crt' -o '/usr/local/share/ca-certificates/SAP%20Global%20Sub%20CA%2005.crt'
-RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Cloud%20Root%20CA.crt' -o '/usr/local/share/ca-certificates/SAP%20Cloud%20Root%20CA.crt'
-RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAPPassportG2.crt' -o '/usr/local/share/ca-certificates/SAPPassportG2.crt'
-RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20SSO%20CA%20G2.crt' -o '/usr/local/share/ca-certificates/SAP%20SSO%20CA%20G2.crt'
-RUN /usr/sbin/update-ca-certificates
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Root%20CA.crt' -o '/usr/share/ca-certificates/SAP_Global_Root_CA.crt' && /usr/sbin/update-ca-certificates
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAPNetCA_G2.crt' -o '/usr/share/ca-certificates/SAPNetCA_G2.crt' && /usr/sbin/update-ca-certificates
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Sub%20CA%2002.crt' -o '/usr/share/ca-certificates/SAP_Global_Sub_CA_02.crt' && /usr/sbin/update-ca-certificates
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Sub%20CA%2004.crt' -o '/usr/share/ca-certificates/SAP_Global_Sub_CA_04.crt' && /usr/sbin/update-ca-certificates
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Sub%20CA%2005.crt' -o '/usr/share/ca-certificates/SAP_Global_Sub_CA_05.crt' && /usr/sbin/update-ca-certificates
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Cloud%20Root%20CA.crt' -o '/usr/share/ca-certificates/SAP_Cloud_Root_CA.crt' && /usr/sbin/update-ca-certificates
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAPPassportG2.crt' -o '/usr/share/ca-certificates/SAPPassportG2.crt' && /usr/sbin/update-ca-certificates
+RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20SSO%20CA%20G2.crt' -o '/usr/share/ca-certificates/SAP_SSO_CA_G2.crt' && /usr/sbin/update-ca-certificates
 
 CMD ["zsh"]
