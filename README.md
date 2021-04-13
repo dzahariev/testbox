@@ -11,6 +11,7 @@ Docker container with several tools that are needed for environment preparation 
 - CF Command line tool: https://github.com/cloudfoundry/cli
 - UAA Command line tool: https://github.com/cloudfoundry/cf-uaac
 - Oh My Zsh: https://github.com/ohmyzsh/ohmyzsh
+- SAP CA certificate from http://www.pki.co.sap.com
 
 ## Build testbox:
 
