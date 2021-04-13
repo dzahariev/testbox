@@ -1,5 +1,7 @@
 FROM maven:3-jdk-8 AS package_step
 
+ENV GIT_SSL_NO_VERIFY true
+
 RUN apt-get update && \
   apt-get install -y zsh && \
   apt-get install -y curl && \
@@ -7,6 +9,9 @@ RUN apt-get update && \
   apt-get install -y vim && \
   apt-get install -y jq && \
   apt-get install -y ruby-full && \
+  apt-get install -y ca-certificates && \
+  update-ca-certificates && \
+  apt-get install -y apt-transport-https && \
   apt-get install -y build-essential && \
   chsh -s $(which zsh) 
 
