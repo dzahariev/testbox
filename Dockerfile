@@ -1,7 +1,5 @@
 FROM maven:3-jdk-8 AS package_step
 
-ENV GIT_SSL_NO_VERIFY true
-
 RUN apt-get update && \
   apt-get install -y zsh && \
   apt-get install -y curl && \
@@ -28,5 +26,9 @@ RUN curl -s https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | 
 RUN curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh && \
   sh install.sh && \
   rm install.sh
+
+# disable git ssl verification 
+RUN git init && \
+  git config --global http.sslVerify false
 
 CMD ["zsh"]
