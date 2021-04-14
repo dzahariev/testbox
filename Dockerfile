@@ -1,4 +1,4 @@
-FROM maven:3-jdk-8 AS package_step
+FROM maven:3.6-jdk-8 AS package_step
 
 RUN apt-get update && \
   apt-get install -y zsh && \
@@ -14,6 +14,7 @@ RUN apt-get update && \
   apt-get install -y ca-certificates && \
   apt-get install -y apt-transport-https && \
   apt-get install -y build-essential && \
+  apt-get install -y libappindicator1 && \
   chsh -s $(which zsh) 
 
 RUN dpkg --add-architecture i386 && \
@@ -35,17 +36,10 @@ RUN curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
   rm install.sh
 
 # install Chrome
-RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-  echo "deb [arch=amd64]  http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list && \
-  apt-get update && \
-  apt-get install -y google-chrome-stable
-
-# install ChromeDriver
-RUN curl https://chromedriver.storage.googleapis.com/78.0.3904.105/chromedriver_linux64.zip --output chromedriver_linux64.zip && \
-  unzip chromedriver_linux64.zip && \
-  mv chromedriver /usr/bin/chromedriver && \
-  chown root:root /usr/bin/chromedriver && \
-  chmod +x /usr/bin/chromedriver
+RUN curl http://www.slimjetbrowser.com/chrome/lnx/chrome64_59.0.3071.86.deb --output /tmp/chrome64_59.0.3071.86.deb && \
+  apt install -y /tmp/chrome64_59.0.3071.86.deb && \
+  rm /tmp/chrome64_59.0.3071.86.deb && \
+  ln -s /etc/alternatives/google-chrome /usr/bin/chrome
 
 # Add SAP root CA to container
 RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20Global%20Root%20CA.crt' -o '/usr/share/ca-certificates/SAP_Global_Root_CA.crt' && /usr/sbin/update-ca-certificates
