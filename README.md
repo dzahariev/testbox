@@ -12,6 +12,7 @@ Docker container with several tools that are needed for environment preparation 
 - UAA Command line tool: https://github.com/cloudfoundry/cf-uaac
 - Oh My Zsh: https://github.com/ohmyzsh/ohmyzsh
 - SAP CA certificate from http://www.pki.co.sap.com
+- Chrome and ChromeDriver
 
 ## Build testbox:
 
