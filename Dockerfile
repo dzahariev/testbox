@@ -16,6 +16,10 @@ RUN apt-get update && \
   apt-get install -y build-essential && \
   chsh -s $(which zsh) 
 
+RUN dpkg --add-architecture i386 && \
+  apt-get update && \
+  apt-get install -y libgtk2.0-0:i386
+
 # install uaac
 RUN gem install cf-uaac
 
@@ -37,7 +41,7 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
   apt-get install -y google-chrome-stable
 
 # install ChromeDriver
-RUN curl https://chromedriver.storage.googleapis.com/90.0.4430.24/chromedriver_linux64.zip --output chromedriver_linux64.zip && \
+RUN curl https://chromedriver.storage.googleapis.com/78.0.3904.105/chromedriver_linux64.zip --output chromedriver_linux64.zip && \
   unzip chromedriver_linux64.zip && \
   mv chromedriver /usr/bin/chromedriver && \
   chown root:root /usr/bin/chromedriver && \
