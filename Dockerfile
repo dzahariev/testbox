@@ -59,4 +59,13 @@ RUN cat /usr/share/ca-certificates/SAPPassportG2.crt | tee -a /etc/ssl/certs/ca-
 RUN curl -ks 'http://aia.pki.co.sap.com/aia/SAP%20SSO%20CA%20G2.crt' -o '/usr/share/ca-certificates/SAP_SSO_CA_G2.crt' && /usr/sbin/update-ca-certificates
 RUN cat /usr/share/ca-certificates/SAP_SSO_CA_G2.crt | tee -a /etc/ssl/certs/ca-certificates.crt
 
+RUN keytool -import -noprompt -trustcacerts -alias SAP_Global_Root_CA -file /usr/share/ca-certificates/SAP_Global_Root_CA.crt -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit || true
+RUN keytool -import -noprompt -trustcacerts -alias SAPNetCA_G2 -file /usr/share/ca-certificates/SAPNetCA_G2.crt -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit || true
+RUN keytool -import -noprompt -trustcacerts -alias SAP_Global_Sub_CA_02 -file /usr/share/ca-certificates/SAP_Global_Sub_CA_02.crt -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit || true
+RUN keytool -import -noprompt -trustcacerts -alias SAP_Global_Sub_CA_04 -file /usr/share/ca-certificates/SAP_Global_Sub_CA_04.crt -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit || true
+RUN keytool -import -noprompt -trustcacerts -alias SAP_Global_Sub_CA_05 -file /usr/share/ca-certificates/SAP_Global_Sub_CA_05.crt -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit || true
+RUN keytool -import -noprompt -trustcacerts -alias SAP_Cloud_Root_CA -file /usr/share/ca-certificates/SAP_Cloud_Root_CA.crt -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit || true
+RUN keytool -import -noprompt -trustcacerts -alias SAPPassportG2 -file /usr/share/ca-certificates/SAPPassportG2.crt -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit || true
+RUN keytool -import -noprompt -trustcacerts -alias SAP_SSO_CA_G2 -file /usr/share/ca-certificates/SAP_SSO_CA_G2.crt -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit || true
+
 CMD ["zsh"]
