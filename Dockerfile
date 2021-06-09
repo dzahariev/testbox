@@ -1,4 +1,4 @@
-FROM maven:3.6-jdk-11 AS package_step
+FROM maven:3.6-jdk-12 AS package_step
 
 RUN apt-get update && \
   apt-get install -y zsh && \
