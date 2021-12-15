@@ -36,9 +36,9 @@ RUN curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
   rm install.sh
 
 # install Chrome
-RUN curl http://www.slimjetbrowser.com/chrome/lnx/chrome64_59.0.3071.86.deb --output /tmp/chrome64_59.0.3071.86.deb && \
-  apt install -y /tmp/chrome64_59.0.3071.86.deb && \
-  rm /tmp/chrome64_59.0.3071.86.deb && \
+RUN curl http://www.slimjetbrowser.com/chrome/files/90.0.4430.72/google-chrome-stable_current_amd64.deb --output /tmp/google-chrome-stable_current_amd64.deb && \
+  apt install -y /tmp/google-chrome-stable_current_amd64.deb && \
+  rm /tmp/google-chrome-stable_current_amd64.deb && \
   ln -s /etc/alternatives/google-chrome /usr/bin/chrome
 
 # Add SAP root CA to container
